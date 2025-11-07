@@ -12,8 +12,8 @@ export default function App() {
         height: 512,
         resizeMode: 'center'}}/>
 
-      <Text>Inicio de la aplicacion</Text>
-      <StatusBar style="auto" />
+      <Text style={{color: 'white'}}>Inicio de la aplicacion</Text>
+      <StatusBar style="ligth" />
     </View>
   );
 }
@@ -21,7 +21,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#000',
     alignItems: 'center',
     justifyContent: 'center',
   },
