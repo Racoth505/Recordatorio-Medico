@@ -119,12 +119,6 @@ function MainAppScreen({ navigation }) {
         setCurrentDate(newDate);
     };
 
-    const changeYear = (increment) => {
-        const newDate = new Date(currentDate);
-        newDate.setFullYear(newDate.getFullYear() + increment);
-        setCurrentDate(newDate);
-    };
-
     const renderCalendar = () => {
         const daysInMonth = getDaysInMonth(currentDate);
         const firstDay = getFirstDayOfMonth(currentDate);
@@ -161,14 +155,10 @@ function MainAppScreen({ navigation }) {
                         <View style={styles.section}>
                             <Text style={styles.sectionTitle}>Calendario Medico</Text>
                             
-                            {/* Controles del calendario */}
+                            {/* Controles del calendario - SOLO MESES */}
                             <View style={styles.calendarControls}>
-                                <Pressable onPress={() => changeYear(-1)} style={styles.controlButton}>
-                                    <Ionicons name="chevron-back" size={20} color="#fff" />
-                                </Pressable>
-                                
                                 <Pressable onPress={() => changeMonth(-1)} style={styles.controlButton}>
-                                    <Ionicons name="chevron-back" size={16} color="#fff" />
+                                    <Ionicons name="chevron-back" size={20} color="#fff" />
                                 </Pressable>
                                 
                                 <Text style={styles.monthYear}>
@@ -176,10 +166,6 @@ function MainAppScreen({ navigation }) {
                                 </Text>
                                 
                                 <Pressable onPress={() => changeMonth(1)} style={styles.controlButton}>
-                                    <Ionicons name="chevron-forward" size={16} color="#fff" />
-                                </Pressable>
-                                
-                                <Pressable onPress={() => changeYear(1)} style={styles.controlButton}>
                                     <Ionicons name="chevron-forward" size={20} color="#fff" />
                                 </Pressable>
                             </View>
@@ -505,19 +491,35 @@ function PrescriptionScreen({ navigation }) {
 
 // Pantalla de Perfil - CON MARCO
 function ProfileScreen({ navigation }) {
+    const handleLogout = () => {
+        // Aquí puedes agregar lógica adicional como limpiar tokens, etc.
+        alert('Sesión cerrada exitosamente');
+        navigation.navigate('Login');
+    };
+
     return (
         <View style={styles.screenContainer}>
             <View style={styles.contentFrame}>
                 <View style={styles.container}>
-                    {/* Header con botón de cambiar contraseña */}
+                    {/* Header con botones */}
                     <View style={styles.profileHeader}>
-                        <Pressable 
-                            style={styles.changePasswordButton}
-                            onPress={() => navigation.navigate('ChangePassword')}
-                        >
-                            <Ionicons name="key" size={20} color="#007AFF" />
-                            <Text style={styles.changePasswordText}>Cambiar Contraseña</Text>
-                        </Pressable>
+                        <View style={styles.headerButtons}>
+                            <Pressable 
+                                style={styles.changePasswordButton}
+                                onPress={() => navigation.navigate('ChangePassword')}
+                            >
+                                <Ionicons name="key" size={20} color="#007AFF" />
+                                <Text style={styles.changePasswordText}>Cambiar Contraseña</Text>
+                            </Pressable>
+                            
+                            <Pressable 
+                                style={styles.logoutButton}
+                                onPress={handleLogout}
+                            >
+                                <Ionicons name="log-out" size={20} color="#FF3B30" />
+                                <Text style={styles.logoutText}>Cerrar Sesión</Text>
+                            </Pressable>
+                        </View>
                     </View>
 
                     <ScrollView contentContainerStyle={styles.profileScrollContent}>
@@ -637,19 +639,21 @@ function ProfileScreen({ navigation }) {
 
 // Pantalla de Cambiar Contraseña - CON MARCO
 function ChangePasswordScreen({ navigation }) {
+    const [contrasenaActual, setContrasenaActual] = useState('');
     const [nuevaContrasena, setNuevaContrasena] = useState('');
     const [confirmarContrasena, setConfirmarContrasena] = useState('');
 
     const handleActualizar = () => {
-        if (nuevaContrasena && confirmarContrasena) {
+        if (contrasenaActual && nuevaContrasena && confirmarContrasena) {
             if (nuevaContrasena === confirmarContrasena) {
+                // Aquí puedes agregar la lógica para verificar la contraseña actual
                 alert('Contraseña actualizada exitosamente');
                 navigation.navigate('Profile');
             } else {
-                alert('Las contraseñas no coinciden');
+                alert('Las nuevas contraseñas no coinciden');
             }
         } else {
-            alert('Por favor completa ambos campos');
+            alert('Por favor completa todos los campos');
         }
     };
 
@@ -664,6 +668,18 @@ function ChangePasswordScreen({ navigation }) {
                             <Text style={styles.sectionTitle}>Cambiar Contraseña</Text>
                             
                             <View style={styles.infoCard}>
+                                <Text style={styles.label}>Contraseña Actual</Text>
+                                <TextInput
+                                    style={styles.textInput}
+                                    placeholder="Ingresa tu contraseña actual"
+                                    placeholderTextColor="#888"
+                                    value={contrasenaActual}
+                                    onChangeText={setContrasenaActual}
+                                    secureTextEntry={true}
+                                    autoCapitalize="none"
+                                    autoCorrect={false}
+                                />
+                                
                                 <Text style={styles.label}>Nueva Contraseña</Text>
                                 <TextInput
                                     style={styles.textInput}
@@ -676,10 +692,10 @@ function ChangePasswordScreen({ navigation }) {
                                     autoCorrect={false}
                                 />
                                 
-                                <Text style={styles.label}>Confirmar Contraseña</Text>
+                                <Text style={styles.label}>Confirmar Nueva Contraseña</Text>
                                 <TextInput
                                     style={styles.textInput}
-                                    placeholder="Confirma tu contraseña"
+                                    placeholder="Confirma tu nueva contraseña"
                                     placeholderTextColor="#888"
                                     value={confirmarContrasena}
                                     onChangeText={setConfirmarContrasena}
@@ -896,16 +912,35 @@ const styles = StyleSheet.create({
         paddingTop: 50,
         backgroundColor: '#1a1a1a',
     },
+    headerButtons: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
     changePasswordButton: {
         flexDirection: 'row',
         alignItems: 'center',
-        alignSelf: 'flex-start',
         padding: 10,
         backgroundColor: '#2a2a2a',
         borderRadius: 8,
     },
     changePasswordText: {
         color: '#007AFF',
+        fontSize: 14,
+        fontWeight: 'bold',
+        marginLeft: 8,
+    },
+    logoutButton: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        padding: 10,
+        backgroundColor: '#2a2a2a',
+        borderRadius: 8,
+        borderWidth: 1,
+        borderColor: '#FF3B30',
+    },
+    logoutText: {
+        color: '#FF3B30',
         fontSize: 14,
         fontWeight: 'bold',
         marginLeft: 8,
@@ -1049,7 +1084,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 0,
     },
     weekDayContainer: {
-        width: '14.28%', // Exactamente 1/7 del ancho
+        width: '14.28%',
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -1066,7 +1101,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 0,
     },
     calendarDay: {
-        width: '14.28%', // Exactamente 1/7 del ancho - Mismo que weekDayContainer
+        width: '14.28%',
         height: 40,
         justifyContent: 'center',
         alignItems: 'center',
@@ -1078,7 +1113,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#007AFF',
     },
     emptyDay: {
-        width: '14.28%', // Exactamente 1/7 del ancho - Mismo que weekDayContainer
+        width: '14.28%',
         height: 40,
         marginVertical: 2,
     },
@@ -1132,7 +1167,6 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontSize: 14,
     },
-    // Estilos para medicamentos en Receta
     medicationItemPrescription: {
         marginBottom: 12,
         paddingLeft: 5,
@@ -1146,7 +1180,6 @@ const styles = StyleSheet.create({
         marginTop: 2,
         lineHeight: 16,
     },
-    // Colores para los medicamentos
     paracetamol: {
         color: '#FF6B6B',
     },
