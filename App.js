@@ -8,7 +8,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 
 const Stack = createStackNavigator();
 
-// Pantalla de Inicio - CON MARCO
+// Pantalla de Inicio
 function HomeScreen({ navigation }) {
     return (
         <View style={styles.screenContainer}>
@@ -23,14 +23,14 @@ function HomeScreen({ navigation }) {
                         <Text style={styles.buttonText}>Iniciar</Text>
                     </Pressable>
                     
-                    <StatusBar style="light" />
+                    <StatusBar style="auto" />
                 </View>
             </View>
         </View>
     );
 }
 
-// Pantalla de Login - CON MARCO
+// Pantalla de Login
 function LoginScreen({ navigation }) {
     const [claveUnica, setClaveUnica] = useState('');
     const [contrasena, setContrasena] = useState('');
@@ -61,7 +61,7 @@ function LoginScreen({ navigation }) {
                         <TextInput
                             style={styles.textInput}
                             placeholder="Ingresa tu clave única"
-                            placeholderTextColor="#888"
+                            placeholderTextColor="#666"
                             value={claveUnica}
                             onChangeText={setClaveUnica}
                             autoCapitalize="none"
@@ -72,7 +72,7 @@ function LoginScreen({ navigation }) {
                         <TextInput
                             style={styles.textInput}
                             placeholder="Ingresa tu contraseña"
-                            placeholderTextColor="#888"
+                            placeholderTextColor="#666"
                             value={contrasena}
                             onChangeText={setContrasena}
                             secureTextEntry={true}
@@ -90,7 +90,7 @@ function LoginScreen({ navigation }) {
     );
 }
 
-// Pantalla Principal después del Login - CON MARCO
+// Pantalla Principal después del Login
 function MainAppScreen({ navigation }) {
     const [currentDate, setCurrentDate] = useState(new Date());
     
@@ -150,6 +150,8 @@ function MainAppScreen({ navigation }) {
             <View style={styles.contentFrame}>
                 <View style={styles.container}>
                     <ScrollView style={styles.scrollContent}>
+                        {/* Espacio superior invisible */}
+                        <View style={styles.invisiblePadding} />
                         
                         {/* Calendario Médico Section */}
                         <View style={styles.section}>
@@ -158,7 +160,7 @@ function MainAppScreen({ navigation }) {
                             {/* Controles del calendario - SOLO MESES */}
                             <View style={styles.calendarControls}>
                                 <Pressable onPress={() => changeMonth(-1)} style={styles.controlButton}>
-                                    <Ionicons name="chevron-back" size={20} color="#fff" />
+                                    <Ionicons name="chevron-back" size={20} color="#007AFF" />
                                 </Pressable>
                                 
                                 <Text style={styles.monthYear}>
@@ -166,7 +168,7 @@ function MainAppScreen({ navigation }) {
                                 </Text>
                                 
                                 <Pressable onPress={() => changeMonth(1)} style={styles.controlButton}>
-                                    <Ionicons name="chevron-forward" size={20} color="#fff" />
+                                    <Ionicons name="chevron-forward" size={20} color="#007AFF" />
                                 </Pressable>
                             </View>
                             
@@ -190,7 +192,7 @@ function MainAppScreen({ navigation }) {
 
                         <View style={styles.divider} />
 
-                        {/* Hoy Section - CON MARCO */}
+                        {/* Hoy Section */}
                         <View style={styles.section}>
                             <View style={styles.todayHeader}>
                                 <Text style={styles.todayBullet}>●</Text>
@@ -222,6 +224,8 @@ function MainAppScreen({ navigation }) {
                             </View>
                         </View>
 
+                        {/* Espacio inferior invisible - MÁS GRANDE */}
+                        <View style={styles.extraBottomPadding} />
                     </ScrollView>
 
                     {/* Navegación inferior */}
@@ -238,7 +242,7 @@ function MainAppScreen({ navigation }) {
                             style={styles.navItem}
                             onPress={() => navigation.navigate('RequestAppointment')}
                         >
-                            <Ionicons name="add-circle" size={24} color="#fff" />
+                            <Ionicons name="add-circle" size={24} color="#666" />
                             <Text style={styles.navText}>Solicitar{"\n"}Consulta</Text>
                         </Pressable>
                         
@@ -246,7 +250,7 @@ function MainAppScreen({ navigation }) {
                             style={styles.navItem}
                             onPress={() => navigation.navigate('Prescription')}
                         >
-                            <Ionicons name="document-text" size={24} color="#fff" />
+                            <Ionicons name="document-text" size={24} color="#666" />
                             <Text style={styles.navText}>Receta</Text>
                         </Pressable>
                         
@@ -254,7 +258,7 @@ function MainAppScreen({ navigation }) {
                             style={styles.navItem}
                             onPress={() => navigation.navigate('Profile')}
                         >
-                            <Ionicons name="person" size={24} color="#fff" />
+                            <Ionicons name="person" size={24} color="#666" />
                             <Text style={styles.navText}>Perfil</Text>
                         </Pressable>
                     </View>
@@ -264,7 +268,7 @@ function MainAppScreen({ navigation }) {
     );
 }
 
-// Pantalla de Solicitar Consulta - CON MARCO
+// Pantalla de Solicitar Consulta
 function RequestAppointmentScreen({ navigation }) {
     const [fechaConsulta, setFechaConsulta] = useState(new Date());
     const [motivoConsulta, setMotivoConsulta] = useState('');
@@ -296,8 +300,10 @@ function RequestAppointmentScreen({ navigation }) {
             <View style={styles.contentFrame}>
                 <View style={styles.requestContainer}>
                     <ScrollView contentContainerStyle={styles.requestScrollContent}>
+                        {/* Espacio superior invisible */}
+                        <View style={styles.invisiblePadding} />
                         
-                        {/* Solicitar Consulta Section - CON MARCO */}
+                        {/* Solicitar Consulta Section */}
                         <View style={styles.requestForm}>
                             <Text style={styles.sectionTitle}>Solicitar Consulta</Text>
                             
@@ -309,7 +315,7 @@ function RequestAppointmentScreen({ navigation }) {
                                 <Text style={styles.dateInputText}>
                                     {formatDate(fechaConsulta)}
                                 </Text>
-                                <Ionicons name="calendar" size={20} color="#888" />
+                                <Ionicons name="calendar" size={20} color="#666" />
                             </Pressable>
                             
                             {showDatePicker && (
@@ -325,7 +331,7 @@ function RequestAppointmentScreen({ navigation }) {
                             <TextInput
                                 style={[styles.textInput, styles.multilineInput]}
                                 placeholder="Describe el motivo de tu consulta"
-                                placeholderTextColor="#888"
+                                placeholderTextColor="#666"
                                 value={motivoConsulta}
                                 onChangeText={setMotivoConsulta}
                                 multiline={true}
@@ -337,7 +343,7 @@ function RequestAppointmentScreen({ navigation }) {
                             <TextInput
                                 style={styles.textInput}
                                 placeholder="Ingresa el nombre del doctor"
-                                placeholderTextColor="#888"
+                                placeholderTextColor="#666"
                                 value={nombreDoctor}
                                 onChangeText={setNombreDoctor}
                             />
@@ -347,6 +353,8 @@ function RequestAppointmentScreen({ navigation }) {
                             </Pressable>
                         </View>
 
+                        {/* Espacio inferior invisible - MÁS GRANDE */}
+                        <View style={styles.extraBottomPadding} />
                     </ScrollView>
 
                     {/* Navegación inferior */}
@@ -355,7 +363,7 @@ function RequestAppointmentScreen({ navigation }) {
                             style={styles.navItem}
                             onPress={() => navigation.navigate('MainApp')}
                         >
-                            <Ionicons name="calendar" size={24} color="#fff" />
+                            <Ionicons name="calendar" size={24} color="#666" />
                             <Text style={styles.navText}>Calendario{"\n"}Medico</Text>
                         </Pressable>
                         
@@ -371,7 +379,7 @@ function RequestAppointmentScreen({ navigation }) {
                             style={styles.navItem}
                             onPress={() => navigation.navigate('Prescription')}
                         >
-                            <Ionicons name="document-text" size={24} color="#fff" />
+                            <Ionicons name="document-text" size={24} color="#666" />
                             <Text style={styles.navText}>Receta</Text>
                         </Pressable>
                         
@@ -379,7 +387,7 @@ function RequestAppointmentScreen({ navigation }) {
                             style={styles.navItem}
                             onPress={() => navigation.navigate('Profile')}
                         >
-                            <Ionicons name="person" size={24} color="#fff" />
+                            <Ionicons name="person" size={24} color="#666" />
                             <Text style={styles.navText}>Perfil</Text>
                         </Pressable>
                     </View>
@@ -389,15 +397,17 @@ function RequestAppointmentScreen({ navigation }) {
     );
 }
 
-// Pantalla de Receta - CON MARCO
+// Pantalla de Receta
 function PrescriptionScreen({ navigation }) {
     return (
         <View style={styles.screenContainer}>
             <View style={styles.contentFrame}>
                 <View style={styles.container}>
                     <ScrollView contentContainerStyle={styles.prescriptionScrollContent}>
+                        {/* Espacio superior invisible */}
+                        <View style={styles.invisiblePadding} />
                         
-                        {/* Receta Section - CON MARCO */}
+                        {/* Receta Section */}
                         <View style={styles.prescriptionContainer}>
                             <Text style={styles.sectionTitle}>Receta</Text>
                             
@@ -447,6 +457,8 @@ function PrescriptionScreen({ navigation }) {
                             </View>
                         </View>
 
+                        {/* Espacio inferior invisible - MÁS GRANDE */}
+                        <View style={styles.extraBottomPadding} />
                     </ScrollView>
 
                     {/* Navegación inferior */}
@@ -455,7 +467,7 @@ function PrescriptionScreen({ navigation }) {
                             style={styles.navItem}
                             onPress={() => navigation.navigate('MainApp')}
                         >
-                            <Ionicons name="calendar" size={24} color="#fff" />
+                            <Ionicons name="calendar" size={24} color="#666" />
                             <Text style={styles.navText}>Calendario{"\n"}Medico</Text>
                         </Pressable>
                         
@@ -463,7 +475,7 @@ function PrescriptionScreen({ navigation }) {
                             style={styles.navItem}
                             onPress={() => navigation.navigate('RequestAppointment')}
                         >
-                            <Ionicons name="add-circle" size={24} color="#fff" />
+                            <Ionicons name="add-circle" size={24} color="#666" />
                             <Text style={styles.navText}>Solicitar{"\n"}Consulta</Text>
                         </Pressable>
                         
@@ -479,7 +491,7 @@ function PrescriptionScreen({ navigation }) {
                             style={styles.navItem}
                             onPress={() => navigation.navigate('Profile')}
                         >
-                            <Ionicons name="person" size={24} color="#fff" />
+                            <Ionicons name="person" size={24} color="#666" />
                             <Text style={styles.navText}>Perfil</Text>
                         </Pressable>
                     </View>
@@ -489,10 +501,9 @@ function PrescriptionScreen({ navigation }) {
     );
 }
 
-// Pantalla de Perfil - CON MARCO
+// Pantalla de Perfil
 function ProfileScreen({ navigation }) {
     const handleLogout = () => {
-        // Aquí puedes agregar lógica adicional como limpiar tokens, etc.
         alert('Sesión cerrada exitosamente');
         navigation.navigate('Login');
     };
@@ -523,8 +534,10 @@ function ProfileScreen({ navigation }) {
                     </View>
 
                     <ScrollView contentContainerStyle={styles.profileScrollContent}>
+                        {/* Espacio superior invisible */}
+                        <View style={styles.invisiblePadding} />
                         
-                        {/* Perfil Section - CON MARCO */}
+                        {/* Perfil Section */}
                         <View style={styles.profileContainer}>
                             <Text style={styles.sectionTitle}>Perfil</Text>
                             
@@ -595,6 +608,8 @@ function ProfileScreen({ navigation }) {
                             </View>
                         </View>
 
+                        {/* Espacio inferior invisible - MÁS GRANDE */}
+                        <View style={styles.extraBottomPadding} />
                     </ScrollView>
 
                     {/* Navegación inferior */}
@@ -603,7 +618,7 @@ function ProfileScreen({ navigation }) {
                             style={styles.navItem}
                             onPress={() => navigation.navigate('MainApp')}
                         >
-                            <Ionicons name="calendar" size={24} color="#fff" />
+                            <Ionicons name="calendar" size={24} color="#666" />
                             <Text style={styles.navText}>Calendario{"\n"}Medico</Text>
                         </Pressable>
                         
@@ -611,7 +626,7 @@ function ProfileScreen({ navigation }) {
                             style={styles.navItem}
                             onPress={() => navigation.navigate('RequestAppointment')}
                         >
-                            <Ionicons name="add-circle" size={24} color="#fff" />
+                            <Ionicons name="add-circle" size={24} color="#666" />
                             <Text style={styles.navText}>Solicitar{"\n"}Consulta</Text>
                         </Pressable>
                         
@@ -619,7 +634,7 @@ function ProfileScreen({ navigation }) {
                             style={styles.navItem}
                             onPress={() => navigation.navigate('Prescription')}
                         >
-                            <Ionicons name="document-text" size={24} color="#fff" />
+                            <Ionicons name="document-text" size={24} color="#666" />
                             <Text style={styles.navText}>Receta</Text>
                         </Pressable>
                         
@@ -637,7 +652,7 @@ function ProfileScreen({ navigation }) {
     );
 }
 
-// Pantalla de Cambiar Contraseña - CON MARCO
+// Pantalla de Cambiar Contraseña
 function ChangePasswordScreen({ navigation }) {
     const [contrasenaActual, setContrasenaActual] = useState('');
     const [nuevaContrasena, setNuevaContrasena] = useState('');
@@ -646,7 +661,6 @@ function ChangePasswordScreen({ navigation }) {
     const handleActualizar = () => {
         if (contrasenaActual && nuevaContrasena && confirmarContrasena) {
             if (nuevaContrasena === confirmarContrasena) {
-                // Aquí puedes agregar la lógica para verificar la contraseña actual
                 alert('Contraseña actualizada exitosamente');
                 navigation.navigate('Profile');
             } else {
@@ -662,8 +676,10 @@ function ChangePasswordScreen({ navigation }) {
             <View style={styles.contentFrame}>
                 <View style={styles.container}>
                     <ScrollView contentContainerStyle={styles.passwordScrollContent}>
+                        {/* Espacio superior invisible */}
+                        <View style={styles.invisiblePadding} />
                         
-                        {/* Cambiar Contraseña Section - CON MARCO */}
+                        {/* Cambiar Contraseña Section */}
                         <View style={styles.passwordContainer}>
                             <Text style={styles.sectionTitle}>Cambiar Contraseña</Text>
                             
@@ -672,7 +688,7 @@ function ChangePasswordScreen({ navigation }) {
                                 <TextInput
                                     style={styles.textInput}
                                     placeholder="Ingresa tu contraseña actual"
-                                    placeholderTextColor="#888"
+                                    placeholderTextColor="#666"
                                     value={contrasenaActual}
                                     onChangeText={setContrasenaActual}
                                     secureTextEntry={true}
@@ -684,7 +700,7 @@ function ChangePasswordScreen({ navigation }) {
                                 <TextInput
                                     style={styles.textInput}
                                     placeholder="Ingresa nueva contraseña"
-                                    placeholderTextColor="#888"
+                                    placeholderTextColor="#666"
                                     value={nuevaContrasena}
                                     onChangeText={setNuevaContrasena}
                                     secureTextEntry={true}
@@ -696,7 +712,7 @@ function ChangePasswordScreen({ navigation }) {
                                 <TextInput
                                     style={styles.textInput}
                                     placeholder="Confirma tu nueva contraseña"
-                                    placeholderTextColor="#888"
+                                    placeholderTextColor="#666"
                                     value={confirmarContrasena}
                                     onChangeText={setConfirmarContrasena}
                                     secureTextEntry={true}
@@ -710,6 +726,8 @@ function ChangePasswordScreen({ navigation }) {
                             </View>
                         </View>
 
+                        {/* Espacio inferior invisible - MÁS GRANDE */}
+                        <View style={styles.extraBottomPadding} />
                     </ScrollView>
 
                     {/* Navegación inferior */}
@@ -718,7 +736,7 @@ function ChangePasswordScreen({ navigation }) {
                             style={styles.navItem}
                             onPress={() => navigation.navigate('MainApp')}
                         >
-                            <Ionicons name="calendar" size={24} color="#fff" />
+                            <Ionicons name="calendar" size={24} color="#666" />
                             <Text style={styles.navText}>Calendario{"\n"}Medico</Text>
                         </Pressable>
                         
@@ -726,7 +744,7 @@ function ChangePasswordScreen({ navigation }) {
                             style={styles.navItem}
                             onPress={() => navigation.navigate('RequestAppointment')}
                         >
-                            <Ionicons name="add-circle" size={24} color="#fff" />
+                            <Ionicons name="add-circle" size={24} color="#666" />
                             <Text style={styles.navText}>Solicitar{"\n"}Consulta</Text>
                         </Pressable>
                         
@@ -734,7 +752,7 @@ function ChangePasswordScreen({ navigation }) {
                             style={styles.navItem}
                             onPress={() => navigation.navigate('Prescription')}
                         >
-                            <Ionicons name="document-text" size={24} color="#fff" />
+                            <Ionicons name="document-text" size={24} color="#666" />
                             <Text style={styles.navText}>Receta</Text>
                         </Pressable>
                         
@@ -760,9 +778,9 @@ export default function App() {
                 initialRouteName="Home"
                 screenOptions={{
                     headerStyle: {
-                        backgroundColor: '#1a1a1a',
+                        backgroundColor: '#ffffff',
                     },
-                    headerTintColor: '#fff',
+                    headerTintColor: '#000',
                     headerTitleStyle: {
                         fontWeight: 'bold',
                     },
@@ -809,215 +827,66 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-    // NUEVOS ESTILOS PARA EL MARCO
+    // Estilos principales con más padding inferior
     screenContainer: {
         flex: 1,
-        backgroundColor: '#000',
+        backgroundColor: '#ffffff',
+        paddingTop: 25,
+        paddingBottom: 35, // AUMENTÉ de 25 a 35
+        paddingHorizontal: 10,
     },
     contentFrame: {
         flex: 1,
-        margin: 10,
-        backgroundColor: '#000',
-        borderRadius: 12,
-        overflow: 'hidden',
-        borderWidth: 1,
-        borderColor: '#333',
+        backgroundColor: '#ffffff',
     },
     
-    // Contenedores centrados para Home y Login
+    // Padding invisible
+    invisiblePadding: {
+        height: 25,
+    },
+    // NUEVO: Padding inferior extra más grande
+    extraBottomPadding: {
+        height: 40, // MÁS GRANDE que el normal
+    },
+    
+    // Contenedores con más padding inferior
     homeContainer: {
         flex: 1,
-        backgroundColor: '#000',
+        backgroundColor: '#ffffff',
         justifyContent: 'center',
         alignItems: 'center',
-        padding: 20,
+        paddingTop: 40,
+        paddingBottom: 50, // AUMENTÉ de 40 a 50
+        paddingHorizontal: 20,
     },
     loginContainer: {
         flex: 1,
-        backgroundColor: '#000',
+        backgroundColor: '#ffffff',
         justifyContent: 'center',
         alignItems: 'center',
-        padding: 20,
+        paddingTop: 30,
+        paddingBottom: 40, // AUMENTÉ de 30 a 40
+        paddingHorizontal: 20,
     },
     requestContainer: {
         flex: 1,
-        backgroundColor: '#000',
+        backgroundColor: '#ffffff',
     },
+    container: {
+        flex: 1,
+        backgroundColor: '#ffffff',
+    },
+    scrollContent: {
+        flex: 1,
+    },
+    
+    // Elementos de UI
     homeTitle: {
-        color: '#fff',
+        color: '#000',
         fontSize: 24,
         fontWeight: 'bold',
         textAlign: 'center',
         marginBottom: 40,
-    },
-    loginForm: {
-        width: '100%',
-        maxWidth: 400,
-        backgroundColor: '#1a1a1a',
-        padding: 20,
-        borderRadius: 10,
-    },
-    requestForm: {
-        flex: 1,
-        justifyContent: 'center',
-        padding: 20,
-        maxWidth: 400,
-        alignSelf: 'center',
-        width: '100%',
-    },
-    requestScrollContent: {
-        flexGrow: 1,
-        justifyContent: 'center',
-    },
-    
-    // Estilos para Receta - CON MARCO
-    prescriptionScrollContent: {
-        flexGrow: 1,
-        justifyContent: 'center',
-        padding: 10,
-    },
-    prescriptionContainer: {
-        maxWidth: 400,
-        alignSelf: 'center',
-        width: '100%',
-        padding: 5,
-    },
-    
-    // ESTILOS PARA PERFIL Y CAMBIAR CONTRASEÑA - CON MARCO
-    profileScrollContent: {
-        flexGrow: 1,
-        padding: 10,
-    },
-    profileContainer: {
-        maxWidth: 400,
-        alignSelf: 'center',
-        width: '100%',
-        padding: 5,
-    },
-    passwordScrollContent: {
-        flexGrow: 1,
-        justifyContent: 'center',
-        padding: 10,
-    },
-    passwordContainer: {
-        maxWidth: 400,
-        alignSelf: 'center',
-        width: '100%',
-        padding: 5,
-    },
-    
-    // ESTILOS PARA EL PERFIL MEJORADO
-    profileHeader: {
-        padding: 15,
-        paddingTop: 50,
-        backgroundColor: '#1a1a1a',
-    },
-    headerButtons: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-    },
-    changePasswordButton: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        padding: 10,
-        backgroundColor: '#2a2a2a',
-        borderRadius: 8,
-    },
-    changePasswordText: {
-        color: '#007AFF',
-        fontSize: 14,
-        fontWeight: 'bold',
-        marginLeft: 8,
-    },
-    logoutButton: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        padding: 10,
-        backgroundColor: '#2a2a2a',
-        borderRadius: 8,
-        borderWidth: 1,
-        borderColor: '#FF3B30',
-    },
-    logoutText: {
-        color: '#FF3B30',
-        fontSize: 14,
-        fontWeight: 'bold',
-        marginLeft: 8,
-    },
-    profilePhotoContainer: {
-        alignItems: 'center',
-        marginBottom: 25,
-        padding: 20,
-    },
-    profilePhoto: {
-        width: 120,
-        height: 120,
-        borderRadius: 60,
-        backgroundColor: '#333',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginBottom: 15,
-        borderWidth: 3,
-        borderColor: '#007AFF',
-    },
-    profileName: {
-        color: '#fff',
-        fontSize: 22,
-        fontWeight: 'bold',
-        textAlign: 'center',
-        marginBottom: 5,
-    },
-    profileEmail: {
-        color: '#888',
-        fontSize: 16,
-        textAlign: 'center',
-    },
-    profileGrid: {
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        justifyContent: 'space-between',
-    },
-    profileField: {
-        width: '48%',
-        marginBottom: 15,
-        paddingBottom: 15,
-        borderBottomWidth: 1,
-        borderBottomColor: '#333',
-    },
-    fieldLabel: {
-        color: '#888',
-        fontSize: 12,
-        marginBottom: 5,
-        fontWeight: '500',
-    },
-    fieldValue: {
-        color: '#fff',
-        fontSize: 16,
-        fontWeight: '500',
-    },
-    secondaryButton: {
-        backgroundColor: '#333',
-        padding: 15,
-        borderRadius: 5,
-        alignItems: 'center',
-        marginTop: 20,
-        borderWidth: 1,
-        borderColor: '#555',
-    },
-    secondaryButtonText: {
-        color: '#fff',
-        fontSize: 16,
-        fontWeight: 'bold',
-    },
-    
-    // Estilos existentes
-    container: {
-        flex: 1,
-        backgroundColor: '#000',
-    },
-    scrollContent: {
-        flex: 1,
     },
     navButton: {
         backgroundColor: '#007AFF',
@@ -1027,33 +896,59 @@ const styles = StyleSheet.create({
         width: '80%',
         maxWidth: 300,
     },
+    buttonText: {
+        color: '#fff',
+        fontSize: 16,
+        fontWeight: 'bold',
+    },
+    
+    // Login
     logoSection: {
-        padding: 20,
+        padding: 25,
         alignItems: 'center',
-        backgroundColor: '#1a1a1a',
-        marginBottom: 20,
+        backgroundColor: '#f8f9fa',
+        marginBottom: 25,
         borderRadius: 10,
         width: '100%',
         maxWidth: 400,
     },
     logo: {
-        color: '#fff',
+        color: '#000',
         fontSize: 24,
         fontWeight: 'bold',
     },
+    loginForm: {
+        width: '100%',
+        maxWidth: 400,
+        backgroundColor: '#f8f9fa',
+        padding: 25,
+        borderRadius: 10,
+    },
+    requestForm: {
+        flex: 1,
+        justifyContent: 'center',
+        padding: 25,
+        maxWidth: 400,
+        alignSelf: 'center',
+        width: '100%',
+    },
+    
+    // Sections
     section: {
-        padding: 15,
-        backgroundColor: '#1a1a1a',
-        margin: 10,
+        padding: 18,
+        backgroundColor: '#f8f9fa',
+        margin: 12,
         borderRadius: 10,
     },
     sectionTitle: {
-        color: '#fff',
+        color: '#000',
         fontSize: 20,
         fontWeight: 'bold',
         marginBottom: 20,
         textAlign: 'center',
     },
+    
+    // Calendario
     calendarControls: {
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -1063,11 +958,11 @@ const styles = StyleSheet.create({
     },
     controlButton: {
         padding: 8,
-        backgroundColor: '#333',
+        backgroundColor: '#f0f0f0',
         borderRadius: 20,
     },
     monthYear: {
-        color: '#fff',
+        color: '#000',
         fontSize: 18,
         fontWeight: 'bold',
         textAlign: 'center',
@@ -1089,7 +984,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     weekDay: {
-        color: '#fff',
+        color: '#000',
         fontSize: 14,
         fontWeight: 'bold',
         textAlign: 'center',
@@ -1105,7 +1000,7 @@ const styles = StyleSheet.create({
         height: 40,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#333',
+        backgroundColor: '#f0f0f0',
         borderRadius: 8,
         marginVertical: 2,
     },
@@ -1118,7 +1013,7 @@ const styles = StyleSheet.create({
         marginVertical: 2,
     },
     dayText: {
-        color: '#fff',
+        color: '#000',
         fontSize: 16,
         fontWeight: '500',
     },
@@ -1126,6 +1021,8 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontWeight: 'bold',
     },
+    
+    // Hoy section
     todayHeader: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -1137,49 +1034,258 @@ const styles = StyleSheet.create({
         marginRight: 8,
     },
     todayTitle: {
-        color: '#fff',
+        color: '#000',
         fontSize: 18,
         fontWeight: 'bold',
     },
     todaySubtitle: {
-        color: '#ccc',
+        color: '#666',
         fontSize: 14,
         marginBottom: 15,
     },
     medicationList: {
-        backgroundColor: '#2a2a2a',
+        backgroundColor: '#ffffff',
         borderRadius: 8,
-        padding: 10,
+        padding: 12,
     },
     medicationItem: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        paddingVertical: 8,
+        paddingVertical: 10,
         borderBottomWidth: 1,
-        borderBottomColor: '#444',
+        borderBottomColor: '#e0e0e0',
     },
     medicationName: {
         fontSize: 14,
         fontWeight: 'bold',
     },
     medicationTime: {
-        color: '#fff',
+        color: '#000',
         fontSize: 14,
     },
+    
+    // Receta
+    prescriptionScrollContent: {
+        flexGrow: 1,
+        justifyContent: 'center',
+        padding: 15,
+    },
+    prescriptionContainer: {
+        maxWidth: 400,
+        alignSelf: 'center',
+        width: '100%',
+        padding: 10,
+    },
     medicationItemPrescription: {
-        marginBottom: 12,
+        marginBottom: 15,
         paddingLeft: 5,
         borderLeftWidth: 2,
-        borderLeftColor: '#333',
-        paddingLeft: 10,
+        borderLeftColor: '#e0e0e0',
+        paddingLeft: 12,
     },
     medicationDosage: {
-        color: '#ccc',
+        color: '#666',
         fontSize: 12,
-        marginTop: 2,
+        marginTop: 4,
         lineHeight: 16,
     },
+    
+    // Formularios
+    label: {
+        color: '#000',
+        fontSize: 14,
+        marginBottom: 5,
+        marginTop: 10,
+        fontWeight: '500',
+    },
+    textInput: {
+        backgroundColor: '#ffffff',
+        padding: 12,
+        borderRadius: 5,
+        marginBottom: 10,
+        color: '#000',
+        fontSize: 16,
+    },
+    multilineInput: {
+        minHeight: 80,
+        textAlignVertical: 'top',
+    },
+    dateInput: {
+        backgroundColor: '#ffffff',
+        padding: 12,
+        borderRadius: 5,
+        marginBottom: 10,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    dateInputText: {
+        color: '#000',
+        fontSize: 16,
+    },
+    button: {
+        backgroundColor: '#007AFF',
+        padding: 15,
+        borderRadius: 5,
+        alignItems: 'center',
+        marginTop: 20,
+    },
+    
+    // Info cards
+    infoCard: {
+        backgroundColor: '#ffffff',
+        borderRadius: 10,
+        padding: 18,
+        marginBottom: 18,
+        borderLeftWidth: 4,
+        borderLeftColor: '#007AFF',
+    },
+    cardTitle: {
+        color: '#007AFF',
+        fontSize: 16,
+        fontWeight: 'bold',
+        marginBottom: 8,
+    },
+    cardContent: {
+        color: '#000',
+        fontSize: 14,
+        lineHeight: 20,
+    },
+    
+    // Perfil
+    profileScrollContent: {
+        flexGrow: 1,
+        padding: 15,
+    },
+    profileContainer: {
+        maxWidth: 400,
+        alignSelf: 'center',
+        width: '100%',
+        padding: 10,
+    },
+    profileHeader: {
+        padding: 20,
+        paddingTop: 60,
+        backgroundColor: '#f8f9fa',
+    },
+    headerButtons: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    changePasswordButton: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        padding: 12,
+        backgroundColor: '#e3f2fd',
+        borderRadius: 8,
+    },
+    changePasswordText: {
+        color: '#007AFF',
+        fontSize: 14,
+        fontWeight: 'bold',
+        marginLeft: 8,
+    },
+    logoutButton: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        padding: 12,
+        backgroundColor: '#ffebee',
+        borderRadius: 8,
+    },
+    logoutText: {
+        color: '#FF3B30',
+        fontSize: 14,
+        fontWeight: 'bold',
+        marginLeft: 8,
+    },
+    profilePhotoContainer: {
+        alignItems: 'center',
+        marginBottom: 30,
+        padding: 25,
+    },
+    profilePhoto: {
+        width: 120,
+        height: 120,
+        borderRadius: 60,
+        backgroundColor: '#007AFF',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: 20,
+    },
+    profileName: {
+        color: '#000',
+        fontSize: 22,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        marginBottom: 8,
+    },
+    profileEmail: {
+        color: '#666',
+        fontSize: 16,
+        textAlign: 'center',
+    },
+    profileGrid: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'space-between',
+    },
+    profileField: {
+        width: '48%',
+        marginBottom: 18,
+        paddingBottom: 18,
+        borderBottomWidth: 1,
+        borderBottomColor: '#e0e0e0',
+    },
+    fieldLabel: {
+        color: '#666',
+        fontSize: 12,
+        marginBottom: 6,
+        fontWeight: '500',
+    },
+    fieldValue: {
+        color: '#000',
+        fontSize: 16,
+        fontWeight: '500',
+    },
+    
+    // Cambiar contraseña
+    passwordScrollContent: {
+        flexGrow: 1,
+        justifyContent: 'center',
+        padding: 15,
+    },
+    passwordContainer: {
+        maxWidth: 400,
+        alignSelf: 'center',
+        width: '100%',
+        padding: 10,
+    },
+    
+    // Navegación inferior
+    bottomNavigation: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        backgroundColor: '#f8f9fa',
+        padding: 12,
+    },
+    navItem: {
+        padding: 5,
+        alignItems: 'center',
+        flex: 1,
+    },
+    navText: {
+        color: '#666',
+        fontSize: 10,
+        textAlign: 'center',
+        marginTop: 4,
+    },
+    activeNavText: {
+        color: '#007AFF',
+    },
+    
+    // Colores de medicamentos
     paracetamol: {
         color: '#FF6B6B',
     },
@@ -1192,97 +1298,16 @@ const styles = StyleSheet.create({
     tempra: {
         color: '#118AB2',
     },
-    label: {
-        color: '#fff',
-        fontSize: 14,
-        marginBottom: 5,
-        marginTop: 10,
-    },
-    textInput: {
-        backgroundColor: '#333',
-        padding: 12,
-        borderRadius: 5,
-        borderWidth: 1,
-        borderColor: '#555',
-        marginBottom: 10,
-        color: '#fff',
-        fontSize: 16,
-    },
-    multilineInput: {
-        minHeight: 80,
-        textAlignVertical: 'top',
-    },
-    dateInput: {
-        backgroundColor: '#333',
-        padding: 12,
-        borderRadius: 5,
-        borderWidth: 1,
-        borderColor: '#555',
-        marginBottom: 10,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-    },
-    dateInputText: {
-        color: '#fff',
-        fontSize: 16,
-    },
-    button: {
-        backgroundColor: '#007AFF',
-        padding: 15,
-        borderRadius: 5,
-        alignItems: 'center',
-        marginTop: 20,
-    },
-    buttonText: {
-        color: '#fff',
-        fontSize: 16,
-        fontWeight: 'bold',
+    
+    // Scroll contents
+    requestScrollContent: {
+        flexGrow: 1,
+        justifyContent: 'center',
+        paddingVertical: 10,
     },
     divider: {
         height: 1,
-        backgroundColor: '#333',
+        backgroundColor: '#e0e0e0',
         marginVertical: 10,
-    },
-    bottomNavigation: {
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        backgroundColor: '#1a1a1a',
-        padding: 10,
-        borderTopWidth: 1,
-        borderTopColor: '#333',
-    },
-    navItem: {
-        padding: 5,
-        alignItems: 'center',
-        flex: 1,
-    },
-    navText: {
-        color: '#fff',
-        fontSize: 10,
-        textAlign: 'center',
-        marginTop: 4,
-    },
-    activeNavText: {
-        color: '#007AFF',
-    },
-    infoCard: {
-        backgroundColor: '#2a2a2a',
-        borderRadius: 10,
-        padding: 15,
-        marginBottom: 15,
-        borderLeftWidth: 4,
-        borderLeftColor: '#007AFF',
-    },
-    cardTitle: {
-        color: '#007AFF',
-        fontSize: 16,
-        fontWeight: 'bold',
-        marginBottom: 8,
-    },
-    cardContent: {
-        color: '#fff',
-        fontSize: 14,
-        lineHeight: 20,
     },
 });
